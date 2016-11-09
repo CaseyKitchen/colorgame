@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<script>
+
+    // list of arrays
+    var color = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+    //the computer choosing the color randomly based on the array given above
+    var picker = color [Math.floor((Math.random() * 10))];
+    picker = picker.toUpperCase();
+    //setting the number of guesses equal to 0 before you start the program
+    var guesses = 0 ;
+
+
+    function guess() {
+        //prompts the user to input one of the colors in the given array
+        var user_guess = prompt("Choose one of the Colors");
+        user_guess = user_guess.toUpperCase();
+        //every time this screen comes back, you add one guess to the number of guesses
+        guesses += 1;
+        //this references the function below
+        checkguess(user_guess);
+    }
+
+
+    //Two different option when the user guesses
+    function checkguess(user_guess) {
+
+
+
+            //When they type in the wrong answer numerically
+            if (color.indexOf(user_guess.toLowerCase()) == -1) {
+                alert("Sorry I didn't recognize your color");
+                guess();
+            }
+
+
+            // Correct answer typed in
+
+
+            else {
+
+                if (user_guess === picker) {
+                    ///document.getElementById("theHtml").style.backgroundColor = user_guess;
+                    var myBody=document.getElementsByTagName("body")[0];
+                    myBody.style.background=user_guess;
+
+                    alert("Congratulations " + "It took you " + guesses + " guesses.");
+
+                }
+
+
+
+                //Alphabetical answer but guess is incorrect. Either higher or lower
+                else {
+
+                    //Guess is alphabetically correct but is too low
+                    if (user_guess < picker) {
+                        alert("Your guess is incorrect. Hint: Your color is alphabetically lower than mine");
+                    }
+
+
+                    //Guess is alphabetically correct but is too high
+                    if (user_guess > picker) {
+                        alert("Your guess is incorrect. Hint: Your color is alphabetically higher than mine");
+                    }
+                    //the function "guess()" is called again so that the user can eventually input the correct color
+                    guess()
+
+
+                }
+            }
+
+
+        }
+
+</script>
+</head>
+<body>
+<style type="text/css" >
+
+    form {
+        background: rgb(255, 119, 128);
+        padding:1em;
+        border:5px solid #000000;
+        margin:1em;
+        width:42em;
+        alignment: center;
+    }
+
+    html{
+        padding: 15em;
+
+    }
+
+
+</style>
+  <form>
+        <div align="center">
+
+            <p>I'm thinking of one of these colors:</p>
+
+            <p>Blue, Cyan, Gold, Gray, Green, Magenta, Orange, Red, White, Yellow</p>
+
+            <label >What color am I thinking of:</label>
+
+            <input  type="submit"
+                    id="csubmit"
+                    value="Start"
+            onclick="guess()"
+            >
+        </div>
+    </form>
+
+
+</body>
+</html>
